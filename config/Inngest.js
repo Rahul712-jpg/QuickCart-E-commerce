@@ -1,4 +1,6 @@
 import {Inngest} from "inngest";
+import connectDB from '@/config/db';
+import User from '@/models/User';
 
 export const inngest = new Inngest({id:"quickcart"});
 
@@ -33,7 +35,7 @@ export const syncUserUpdation=inngest.createFunction(
     },
     { event:'clerk/user.updated'},
     async({event})=>{
-        const {id,first_name,last_name,email,image_url} = event.data;
+        const {id,first_name,last_name,email_addresses,image_url} = event.data;
         const userData={
             email:email_addresses[0].email_address,
             name:first_name+" "+last_name,
