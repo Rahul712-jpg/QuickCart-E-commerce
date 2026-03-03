@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useAppContext } from "@/context/AppContext";
 import Image from "next/image";
 import { useClerk, UserButton } from "@clerk/nextjs";
+import { Router } from "next/router";
 import { User } from "@clerk/nextjs";
 
 import { useRouter } from "next/navigation";
