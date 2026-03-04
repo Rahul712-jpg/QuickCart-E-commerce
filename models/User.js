@@ -1,6 +1,5 @@
-import Cart from "@/app/cart/page";
+
 import mongoose from "mongoose";
-import { unique } from "next/dist/build/utils";
 
 const userSchema=new mongoose.Schema({
     _id:{type:String,required:true},
@@ -13,4 +12,4 @@ const userSchema=new mongoose.Schema({
 
 const User=mongoose.models.user||mongoose.model('user',userSchema);
 
-export default User;
+export default User
