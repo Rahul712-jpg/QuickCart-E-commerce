@@ -1,4 +1,3 @@
-"use client"
 import React from "react";
 import { assets, BagIcon, BoxIcon, CartIcon, HomeIcon} from "@/assets/assets";
 import Link from "next/link"
