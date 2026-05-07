@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 export async function GET(request) {
     try{
            const {userId}=getAuth(request)
-           console.log("userId from Clerk:", userId)
+        //    console.log("userId from Clerk:", userId)
            
            if(!userId){
             return NextResponse.json({error:'Unauthorized'},{status:401})
@@ -15,7 +15,7 @@ export async function GET(request) {
 
            await connectDB();
            const user=await User.findById(userId);
-           console.log("User from DB:", user)
+           // console.log("User from DB:", user)
 
            if(!user){
             return NextResponse.json({error:'User not found'},{status:404})   

@@ -14,8 +14,8 @@ const OrderSummary = () => {
 
   const fetchUserAddresses = async () => {
     try{
-      const toknen=await getToken()
-      const {data}=await fetch('/api/user/get-addresses',{headers:{Authorization:`Bearer ${toknen}`}})
+      const token = await getToken()
+      const {data}=await fetch('/api/user/get-addresses',{headers:{Authorization:`Bearer ${token}`}})
       if(data.success){
         setUserAddresses(data.addresses)
         if(data.addresses.length>0){
@@ -38,10 +38,9 @@ const OrderSummary = () => {
       try{
         if(!selectedAddress){
          return toast.error("Please select an address")
-         
         }
-        let cartItemsData=object.keys(cartItems).map((key)=>({product:key,quantity:cartItems[key]}))
-        cartItemsData=cartItemsData.filter((item)=>item.quantity>0)
+        let cartItemsData = Object.keys(cartItems).map((key)=>({product:key,quantity:cartItems[key]}))
+        cartItemsData = cartItemsData.filter((item)=>item.quantity>0)
 
         if(cartItemsData.length===0){
           return toast.error("Your cart is empty")
@@ -49,7 +48,7 @@ const OrderSummary = () => {
 
         const token=await getToken()
 
-        const {data}= await axios.post('api/order/create',{
+        const {data}= await axios.post('/api/order/create',{
           address:selectedAddress._id,
           items:cartItemsData
         },{
