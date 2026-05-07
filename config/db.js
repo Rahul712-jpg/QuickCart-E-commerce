@@ -20,6 +20,7 @@ async function connectDB(){
 
         }
     cached.conn=await cached.promise;
+    console.log("✅ CONNECTED DB:", conn.connection.name);
     return cached.conn;
 }
     
