@@ -5,6 +5,7 @@ import { inngest } from "@/config/Inngest";
 import User from "@/models/User";
 
 export async function POST(req){
+    console.log("API HIT")
     try{
 
         const {userId}=getAuth()
