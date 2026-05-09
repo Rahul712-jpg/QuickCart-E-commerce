@@ -15,7 +15,8 @@ export const syncUserCreation=inngest.createFunction(
 
     },
     async({event})=>{
-        
+         console.log("INNGEST EVENT RECEIVED")
+console.log(event.data)
         const {id,first_name,last_name,email_addresses,image_url} = event.data;
         const userData={
             _id:id,
@@ -79,6 +80,7 @@ export const createUserOrder=inngest.createFunction({
 
 }  ,{event:'order.created'},
 async({events})=>{
+    console.log("USER SAVED")
      const orders=events.map((event)=>{
         return {
             userId:event.data.userId,
