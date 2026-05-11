@@ -1,16 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    turbopack: {
+        root: process.cwd(),
+    },
+
     images: {
         remotePatterns: [
             {
                 protocol: 'https',
                 hostname: 'res.cloudinary.com',
-                pathname: '**',
+                pathname: '/**',
             },
             {
                 protocol: 'https',
                 hostname: 'raw.githubusercontent.com',
-                pathname: '**',
+                pathname: '/**',
             },
         ],
     },
