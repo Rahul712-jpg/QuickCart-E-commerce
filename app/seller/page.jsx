@@ -5,8 +5,8 @@ import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
 // import { headers } from "next/headers";
 import axios from "axios";
-import toast from "react-hot-toast";
-import { set } from "mongoose";
+import {toast} from "react-hot-toast";
+
 
 const AddProduct = () => {
 
