@@ -1,27 +1,39 @@
 import authSeller from "@/lib/authSeller";
-import {getAuth} from "@clerk/nextjs/server";
+import { getAuth } from "@clerk/nextjs/server";
 import connectDB from "@/config/db";
-import { NextResponse } from "next/server"
-import Address from "@/models/Address";
+import { NextResponse } from "next/server";
+import Order from "@/models/order";
 
-export async function GET(){
-    try{
-         
-        const {userId}=getAuth(request);
-        const isSeller=await authSeller(userId);
+export async function GET(req) {
+    try {
 
-        if(!isSeller){  
-            return NextResponse.json({success:false,message:"Unauthorized"}, {status:401})
+        const { userId } = getAuth(req);
+
+        const isSeller = await authSeller(userId);
+
+        if (!isSeller) {
+            return NextResponse.json(
+                { success: false, message: "Unauthorized" },
+                { status: 401 }
+            );
         }
 
         await connectDB();
-        Address.length
-        const orders=await Order.find({}).populate('address items.product')
 
-        return NextResponse.json({success:true,orders}, {status:200})
+        const orders = await Order.find({})
+            .populate("address")
+            .populate("items.product");
 
-    }catch(error){
-        return NextResponse.json({success:false,message:"Unauthorized"}, {status:401})
+        return NextResponse.json(
+            { success: true, orders },
+            { status: 200 }
+        );
 
+    } catch (error) {
+
+        return NextResponse.json(
+            { success: false, message: error.message },
+            { status: 500 }
+        );
     }
 }
