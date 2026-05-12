@@ -30,9 +30,7 @@ const Orders = () => {
     }
 
     useEffect(() => {
-       
         fetchSellerOrders();
-    
     }, []);
 
     return (
