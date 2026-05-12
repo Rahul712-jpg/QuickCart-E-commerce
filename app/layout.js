@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import { AppContextProvider } from "@/context/AppContext";
 import Providers from "@/components/Providers";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -16,6 +17,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body className={`${outfit.className} antialiased text-gray-700`} suppressHydrationWarning>
         <Providers>
@@ -25,5 +27,6 @@ export default function RootLayout({ children }) {
         </Providers>
       </body>
     </html>
+      </ClerkProvider>
   );
 }
