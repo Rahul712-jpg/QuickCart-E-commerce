@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+
 export const AppContext = createContext();
 
 export const useAppContext = () => {
@@ -16,7 +17,7 @@ export const AppContextProvider = (props) => {
     const currency = process.env.NEXT_PUBLIC_CURRENCY
     const router = useRouter()
 
-    const {user}=useUser()
+    const { user }=useUser()
     const {getToken}=useAuth()
 
     const [products, setProducts] = useState([])
@@ -27,7 +28,12 @@ export const AppContextProvider = (props) => {
     const fetchProductData = async () => {
 
         try{
-            const {data}=await axios.get('/api/product/list')
+            const token=await getToken()
+            const {data}=await axios.get('/api/product/list', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             if(data.success){
                 setProducts(data.products)
         }else{
@@ -45,17 +51,22 @@ export const AppContextProvider = (props) => {
             setIsSeller(true)
            }
            const token=await getToken()
-           
-            console.log('user')
+            // console.log(token)
             
-          const { data } = await axios.get('/api/user/data',{headers:{Authorization:`Bearer ${token}`}})
-            
+        
+
+const { data } = await axios.get('/api/user/data', {
+   headers: {
+      Authorization: `Bearer ${token}`
+   }
+}) 
+            console.log(data)
            if(data.success){
-            setUserData(data.user)
-            setCartItems(data.user.cartItems)
-           }else if(data.error){
-            toast.error(data.error)
-           }
+    setUserData(data.user)
+    setCartItems(data.user.cartItems)
+}else{
+    toast.error(data.message)
+}
              
         }catch(error){
               toast.error(error.message,'error')

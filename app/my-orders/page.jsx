@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Loading from "@/components/Loading";
 import axios from "axios";
+import {toast} from "react-hot-toast";
 
 const MyOrders = () => {
 
@@ -17,7 +18,7 @@ const MyOrders = () => {
 
     const fetchOrders = async () => {
         try{
-            const token=await getToken()
+            const token=await getToken();
             const {data}=await axios.get('/api/order/list',{headers:{Authorization:`Bearer ${token}`}})
             if(data.success){
                 setOrders(data.orders.reverse())
