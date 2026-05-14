@@ -2,7 +2,7 @@ import authSeller from "@/lib/authSeller";
 import { getAuth } from "@clerk/nextjs/server";
 import connectDB from "@/config/db";
 import { NextResponse } from "next/server";
-import Order from "@/models/Order";
+import Order from "@/models/order";
 
 export async function GET(req) {
     try {
