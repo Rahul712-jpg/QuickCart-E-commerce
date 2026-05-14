@@ -1,6 +1,6 @@
 import Address from "@/models/Address";
 import Product from "@/models/Product";
-import Order from "@/models/Order";
+import Order from "@/models/order";
 
 import connectDB from "@/config/db";
 
