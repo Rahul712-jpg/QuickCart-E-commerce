@@ -8,14 +8,12 @@ export async function GET(request) {
     try {
 
         const { userId } = getAuth(request)
-
-        console.log("USER ID:", userId)
+          
+        console.log( userId)
 
         await connectDB()
 
-        const user = await User.findOne({
-            clerkId: userId
-        })
+        const user = await User.findById(userId)
 
         if (!user) {
             return NextResponse.json(

@@ -3,28 +3,50 @@ import { NextResponse } from "next/server";
 import connectDB from "@/config/db";
 import User from "@/models/User";
 
-export async function POST(request){
-    try{
-        const {userId}=getAuth(request)
+export async function POST(request) {
 
-        const {cartData}=await request.json()
+    try {
+
+        const { userId } = getAuth(request);
+
+        const { cartData } = await request.json();
 
         await connectDB();
-        if(!user){
-   return NextResponse.json(
-      {success:false,message:"User not found"},
-      {status:404}
-   )
-}
 
-        const user=await User.findById(userId)
+        const user = await User.findById(userId);
 
-        user.cartItems=cartData
-        await user.save()
+        if (!user) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: "User not found"
+                },
+                { status: 404 }
+            );
+        }
 
-        return NextResponse.json({success:true,message:'Cart updated successfully'},{status:200})
-    }catch(error){
-        return NextResponse.json({success:false,message:error.message},{status:500})
+        user.cartItems = cartData;
 
+        await user.save();
+
+        return NextResponse.json(
+            {
+                success: true,
+                message: "Cart updated successfully"
+            },
+            { status: 200 }
+        );
+
+    } catch (error) {
+
+        console.log(error);
+
+        return NextResponse.json(
+            {
+                success: false,
+                message: error.message
+            },
+            { status: 500 }
+        );
     }
 }

@@ -12,6 +12,7 @@ export async function GET(request){
     try{
 
         const { userId } = getAuth(request);
+        console.log("USER ID:", userId)
 
         await connectDB();
 
