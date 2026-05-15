@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const OrderSummary = () => {
 
-  const { currency, router, getCartCount, getCartAmount,getToken,user,cartItems} = useAppContext()
+  const { currency, router, getCartCount, getCartAmount,getToken,user,cartItems,setCartItems} = useAppContext()
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -84,14 +84,14 @@ const OrderSummary = () => {
         items: cartItemsData
       },
       {
-        headers: {
-          Authorization: `Bearer ${token}`
+        headers: {Authorization: `Bearer ${token}`
         }
       }
     )
 
     if (data.success) {
       toast.success(data.message)
+      setCartItems({})
       router.push('/order-placed')
     } else {
       toast.error(data.message)
