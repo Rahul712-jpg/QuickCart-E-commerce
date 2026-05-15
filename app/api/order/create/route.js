@@ -4,11 +4,11 @@ import Product from "@/models/Product";
 import { inngest } from "@/config/Inngest";
 import User from "@/models/User";
 
-export async function POST(req) {
+export async function POST(request) {
   try {
-    const { userId } = getAuth(req);
+    const { userId } = getAuth(request);
 
-    const { address, items } = await req.json();
+    const { address, items } = await request.json();
 
     if (!address || items.length === 0) {
       return NextResponse.json(
@@ -25,7 +25,7 @@ export async function POST(req) {
     }
 
     await inngest.send({
-      name: "order/created",
+      name: 'order/created',
       data: {
         userId,
         address,
