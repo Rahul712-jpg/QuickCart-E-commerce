@@ -1,7 +1,7 @@
 import {Inngest} from "inngest";
 import User from '@/models/User';
 import connectDB from "./db";
-import Order from "@/models/order";
+import Order from "@/models/Order";
 
 export const inngest = new Inngest({id:"quickcart"});
 

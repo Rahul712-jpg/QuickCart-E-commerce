@@ -1,6 +1,6 @@
 import Address from "@/models/Address";
 import Product from "@/models/Product";
-import Order from "@/models/order";
+import Order from "@/models/Order";
 
 import connectDB from "@/config/db";
 
@@ -17,7 +17,7 @@ export async function GET(request){
         await connectDB();
 
         const orders = await Order.find({ user: userId })
-            .populate('address')
+            .populate("address")
             .populate('items.product');
 
         return NextResponse.json(
