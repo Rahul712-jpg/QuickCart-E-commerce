@@ -1,19 +1,18 @@
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
-    
+
     user: {
         type: String,
-        required: true,
-        ref: 'user'
+        required: true
     },
 
     items: [
         {
             product: {
-                type: String,
-                required: true,
-                ref: 'product'
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Product",
+                required: true
             },
 
             quantity: {
@@ -29,14 +28,14 @@ const orderSchema = new mongoose.Schema({
     },
 
     address: {
-        type: String,
-        required: true,
-        ref: 'address'
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Address",
+        required: true
     },
 
     status: {
         type: String,
-        default: "pending",
+        default: "Pending",
         required: true
     },
 
@@ -49,6 +48,6 @@ const orderSchema = new mongoose.Schema({
 
 const Order =
     mongoose.models.Order ||
-    mongoose.model('Order', orderSchema);
+    mongoose.model("Order", orderSchema);
 
 export default Order;

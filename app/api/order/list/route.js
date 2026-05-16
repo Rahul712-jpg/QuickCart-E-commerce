@@ -17,8 +17,8 @@ export async function GET(request){
         await connectDB();
 
         const orders = await Order.find({ user: userId })
-            .populate("address")
-            .populate('items.product');
+    .populate("address")
+    .populate("items.product");
 
         return NextResponse.json(
             { success: true, orders },
